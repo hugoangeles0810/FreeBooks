@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primaryColor">#ff19bc9d</color>
+    <color name="descriptionColor">#606E7B</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="pressedBookItem">#46606E7B</color>
+
+</resources>
