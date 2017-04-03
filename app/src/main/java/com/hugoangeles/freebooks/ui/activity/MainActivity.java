@@ -2,7 +2,6 @@ package com.hugoangeles.freebooks.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -15,9 +14,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.hugoangeles.freebooks.R;
-import com.hugoangeles.freebooks.config.Constantes;
 import com.hugoangeles.freebooks.model.Book;
-import com.hugoangeles.freebooks.presenter.BooksSearchSearchPresenter;
+import com.hugoangeles.freebooks.presenter.BooksSearchPresenter;
 import com.hugoangeles.freebooks.ui.adapter.BooksResultsAdapter;
 import com.hugoangeles.freebooks.ui.adapter.BooksResultsAdapter.ItemClickListener;
 import com.hugoangeles.freebooks.view.BooksSearchMvpView;
@@ -29,7 +27,7 @@ public class MainActivity extends ActionBarActivity implements BooksSearchMvpVie
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private BooksSearchSearchPresenter booksSearchPresenter;
+    private BooksSearchPresenter booksSearchPresenter;
     private SearchView mSearchView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mBooksRecyclerView;
@@ -48,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements BooksSearchMvpVie
         mBooksResultsAdapter = new BooksResultsAdapter(this);
         mBooksResultsAdapter.setOnItemClickListener(this);
         mBooksRecyclerView.setAdapter(mBooksResultsAdapter);
-        booksSearchPresenter = new BooksSearchSearchPresenter();
+        booksSearchPresenter = new BooksSearchPresenter();
 
         mQuery = "";
         if (savedInstanceState !=null) {
@@ -147,9 +145,10 @@ public class MainActivity extends ActionBarActivity implements BooksSearchMvpVie
     }
 
     @Override
-    public void launchBookDetail(Long id) {
+    public void launchBookDetail(Book book) {
         Intent intent = new Intent(this, BookDetailActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("id", book.getId());
+        intent.putExtra("book", book);
         startActivity(intent);
     }
 
@@ -171,6 +170,6 @@ public class MainActivity extends ActionBarActivity implements BooksSearchMvpVie
 
     @Override
     public void onItemClicked(Book book) {
-        booksSearchPresenter.launchBookDetail(book.getId());
+        booksSearchPresenter.launchBookDetail(book);
     }
 }

@@ -9,6 +9,8 @@ public interface BookMvpView extends MvpView{
 
     void renderBook(Book book);
 
+    void showError(String msg);
+
     void showLoader();
 
     void hideLoader();

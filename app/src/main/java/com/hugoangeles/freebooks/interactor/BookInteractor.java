@@ -5,9 +5,7 @@ import com.hugoangeles.freebooks.api.BookService;
 import com.hugoangeles.freebooks.api.CancelableCallback;
 import com.hugoangeles.freebooks.interactor.callback.BookCallback;
 import com.hugoangeles.freebooks.model.Book;
-
 import retrofit.Call;
-import retrofit.Callback;
 import retrofit.Response;
 
 /**
@@ -31,14 +29,16 @@ public class BookInteractor {
             @Override
             public void onCancelableResponse(Response<Book> response) {
                 Book book = response.body();
-                if (book != null)
+                if (book != null && !book.isEmpty()) {
                     bookCallback.onBookLoad(book);
-                else
+                } else {
                     bookCallback.onBookNotLoad();
+                }
             }
 
             @Override
             public void onCancelableFailure(Throwable t) {
+                t.printStackTrace();
                 bookCallback.onBookNotLoad();
             }
         });

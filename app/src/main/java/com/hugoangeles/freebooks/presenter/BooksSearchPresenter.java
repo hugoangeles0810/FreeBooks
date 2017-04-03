@@ -1,6 +1,5 @@
 package com.hugoangeles.freebooks.presenter;
 
-import com.hugoangeles.freebooks.api.CancelableCallback;
 import com.hugoangeles.freebooks.config.Constantes;
 import com.hugoangeles.freebooks.interactor.BooksSearchInteractor;
 import com.hugoangeles.freebooks.interactor.callback.BooksSearchCallback;
@@ -12,9 +11,9 @@ import java.util.List;
 /**
  * Created by Hugo on 26/11/15.
  */
-public class BooksSearchSearchPresenter implements Presenter<BooksSearchMvpView>, BooksSearchCallback {
+public class BooksSearchPresenter implements Presenter<BooksSearchMvpView>, BooksSearchCallback {
 
-    public static final String TAG = BooksSearchSearchPresenter.class.getSimpleName();
+    public static final String TAG = BooksSearchPresenter.class.getSimpleName();
 
     private BooksSearchMvpView booksSearchMvpView;
     private BooksSearchInteractor booksSearchInteractor;
@@ -40,8 +39,8 @@ public class BooksSearchSearchPresenter implements Presenter<BooksSearchMvpView>
         booksSearchInteractor.queryBooks(query, this);
     }
 
-    public void launchBookDetail(Long id) {
-        booksSearchMvpView.launchBookDetail(id);
+    public void launchBookDetail(Book book) {
+        booksSearchMvpView.launchBookDetail(book);
     }
 
     @Override

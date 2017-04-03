@@ -15,7 +15,7 @@ public interface BooksSearchMvpView extends MvpView {
 
     void renderBooks(List<Book> books);
 
-    void launchBookDetail(Long id);
+    void launchBookDetail(Book book);
 
     void showNoBooksFound();
 

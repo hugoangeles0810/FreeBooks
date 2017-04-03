@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import com.hugoangeles.freebooks.R;
 import com.hugoangeles.freebooks.model.Book;
 import com.hugoangeles.freebooks.presenter.BookPresenter;
@@ -30,6 +31,7 @@ public class BookDetailActivity extends ActionBarActivity implements BookMvpView
     private BookPresenter bookPresenter;
     private Button mBtnDownload;
     private long id;
+    private Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class BookDetailActivity extends ActionBarActivity implements BookMvpView
 
         if (getIntent() != null) {
             id = getIntent().getLongExtra("id", 0);
+            book = (Book) getIntent().getSerializableExtra("book");
+            renderBook(book);
         }
 
         mBtnDownload.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +123,17 @@ public class BookDetailActivity extends ActionBarActivity implements BookMvpView
                     .into(mLogo);;
             mAuthor.setText(book.getAuthor());
             mDescription.setText(book.getDescription());
-            mBtnDownload.setTag(book.getDownload());
+            if (book.getDownload() != null) {
+                mBtnDownload.setTag(book.getDownload());
+                mBtnDownload.setEnabled(true);
+            } else {
+                mBtnDownload.setEnabled(false);
+            }
         }
+    }
+
+    @Override public void showError(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override

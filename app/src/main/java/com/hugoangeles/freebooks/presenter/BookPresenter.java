@@ -46,6 +46,7 @@ public class BookPresenter implements Presenter<BookMvpView>, BookCallback {
 
     @Override
     public void onBookNotLoad() {
-
+        bookMvpView.hideLoader();
+        bookMvpView.showError("Error del servidor, detalles adicionales del libro no se pudieron obtener");
     }
 }

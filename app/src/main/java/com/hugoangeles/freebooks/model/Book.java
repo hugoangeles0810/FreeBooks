@@ -111,4 +111,45 @@ public class Book implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Boolean isEmpty() {
+        return id == null && title == null && download == null;
+    }
+
+    @Override public String toString() {
+        return "Book{"
+            + "id="
+            + id
+            + ", title='"
+            + title
+            + '\''
+            + ", subtitle='"
+            + subtitle
+            + '\''
+            + ", description='"
+            + description
+            + '\''
+            + ", author='"
+            + author
+            + '\''
+            + ", ISBN='"
+            + ISBN
+            + '\''
+            + ", page='"
+            + page
+            + '\''
+            + ", year='"
+            + year
+            + '\''
+            + ", publisher='"
+            + publisher
+            + '\''
+            + ", image='"
+            + image
+            + '\''
+            + ", download='"
+            + download
+            + '\''
+            + '}';
+    }
 }
